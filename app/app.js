@@ -4,18 +4,29 @@ app.controller('mainController', function($scope) {
 
   $scope.pullSubreddit = function() {
     $scope.redditEntries = null;
-    fetchSubredditData($scope.subreddit).then(populateResults);
+    fetchSubredditData(buildRedditUrl()).then(populateResults);
   };
 
-  const fetchSubredditData = async subreddit => {
-    const response = await fetch(`http://www.reddit.com/r/${subreddit}.json`);
+  $scope.loadNextPage = function() {
+    $scope.currentPage++;
+    fetchSubredditData(buildRedditUrl($scope.next)).then(populateResults);
+  };
+
+  const buildRedditUrl = (next) => {
+    return next ? `http://www.reddit.com/r/${$scope.subreddit}.json?&after=${next}` :
+    `http://www.reddit.com/r/${$scope.subreddit}.json`;
+  };
+
+  const fetchSubredditData = async (url) => {
+    const response = await fetch(url);
     const responseContent = await response.json();
-    return responseContent && responseContent.data && responseContent.data.children;
+    return responseContent && responseContent.data;
   };
 
   const populateResults = redditEntries => {
     $scope.$apply(() => {
-      $scope.redditEntries = redditEntries.map(entry => entry.data);
+      $scope.redditEntries = redditEntries.children.map(entry => entry.data);
+      $scope.next = redditEntries.after;
     });    
   };
 });

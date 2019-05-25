@@ -19,6 +19,7 @@
         <div class="reddit-entries-container" ng-show="redditEntries">
           <div reddit-entry entry="entry" class="reddit-entry" ng-repeat="entry in redditEntries">
           </div>
+          <button ng-if="redditEntries" ng-click="loadNextPage()">Next Page</button>
         </div>
       </div>
     </body>
