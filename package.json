@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/duviduduvid/small-reddit-reader/issues"
   },
-  "homepage": "https://github.com/duviduduvid/small-reddit-reader#readme"
+  "homepage": "https://github.com/duviduduvid/small-reddit-reader#readme",
+  "dependencies": {
+    "angular": "^1.7.8",
+    "webpack": "^4.32.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-es2015": "^6.24.1"
+  }
 }
