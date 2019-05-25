@@ -59,13 +59,26 @@ app.directive("redditEntry", function() {
       return string.replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, m => characters[m]);
   }
 
+  function parseSelfText(text) {
+    let parsedText = text.length < 200 ? text : text.substring(0, 200);
+    if (parsedText && parsedText.length === 200) {
+      let splittedText = parsedText.split('.');
+      if (splittedText.length > 1) {
+        splittedText.splice(splittedText.length -1);
+      }
+      parsedText = splittedText.join('.') + '.';
+
+    }
+    return parsedText;
+  }
+
 	return {
 		templateUrl:'./app/reddit-entry.html',
 		scope: {
       entry: '='
 		},
 		link: function(scope, element, attributes) {
-      const {title, author, permalink, ups, created_utc, thumbnail} = scope.entry;
+      const {title, author, permalink, ups, created_utc, thumbnail, selftext} = scope.entry;
       scope.title = convertHtmlChars(title);
       scope.author = author;
       scope.url = 'https://www.reddit.com' + permalink;
@@ -73,6 +86,7 @@ app.directive("redditEntry", function() {
       scope.time = moment.unix(created_utc);
       scope.timeAgo = moment(scope.time).fromNow();
       scope.thumbnail = thumbnail;
+      scope.selfText = parseSelfText(selftext);
     }
 	};
 });
