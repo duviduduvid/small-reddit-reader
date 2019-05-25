@@ -28,10 +28,13 @@ app.directive("redditEntry", function() {
 			entry: '='
 		},
 		link: function(scope, element, attributes) {
-      const {title, author, url} = scope.entry;
+      const {title, author, url, ups, created_utc} = scope.entry;
       scope.title = title;
       scope.author = author;
       scope.url = url;
+      scope.ups = ups;
+      scope.time = moment.unix(created_utc);
+      scope.timeAgo = moment(scope.time).fromNow();
 		}
 	};
 	
