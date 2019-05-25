@@ -105,7 +105,7 @@ app.directive("redditEntry", function() {
       scope.ups = ups;
       scope.time = moment.unix(created_utc);
       scope.timeAgo = moment(scope.time).fromNow();
-      scope.thumbnail = thumbnail;
+      scope.thumbnail = thumbnail !== 'self' ? thumbnail : undefined;
       scope.selfText = parseSelfText(selftext);
     }
 	};
