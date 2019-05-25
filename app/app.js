@@ -7,6 +7,10 @@ app.controller('mainController', function($scope) {
     fetchSubredditData($scope.subreddit).then(populateResults);
   };
 
+  $scope.goToReddit = function(redditEntry) {
+    window.open(redditEntry.url, '_blank');
+  };
+
   const fetchSubredditData = async subreddit => {
     const response = await fetch(`http://www.reddit.com/r/${subreddit}.json`);
     const responseContent = await response.json();
@@ -21,23 +25,33 @@ app.controller('mainController', function($scope) {
 });
 
 app.directive("redditEntry", function() {
-	
+  function convertHtmlChars(string) {
+      const characters = {
+        "&amp;": '&',
+        "&lt;": "<",
+        "&gt;": ">",
+        "&quot;": '"',
+        "&apos;": "'"};
+
+      return string.replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, m => characters[m]);
+  }
+
 	return {
 		templateUrl:'./app/reddit-entry.html',
 		scope: {
 			entry: '='
 		},
 		link: function(scope, element, attributes) {
-      const {title, author, url, ups, created_utc} = scope.entry;
-      scope.title = title;
+      const {title, author, permalink, ups, created_utc, thumbnail} = scope.entry;
+      scope.title = convertHtmlChars(title);
       scope.author = author;
-      scope.url = url;
+      scope.url = 'https://www.reddit.com' + permalink;
       scope.ups = ups;
       scope.time = moment.unix(created_utc);
       scope.timeAgo = moment(scope.time).fromNow();
-		}
+      scope.thumbnail = thumbnail;
+    }
 	};
-	
 });
 
 app.directive("onEnter", function() {

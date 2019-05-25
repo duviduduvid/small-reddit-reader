@@ -1,5 +1,6 @@
 body {
   padding: 12px 20%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
@@ -13,10 +14,27 @@ header {
 }
 
 .reddit-entry {
-  background-color: bisque;
+  display: flex;
+  background-color: #b5bdc4;
   border: 0.5px blue solid;
   margin: 5px 0;
   padding: 10px;
+}
+
+.entry-content {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.entry-title {
+  font-weight: 600;
+}
+
+.author{
+  font-style: italic;
+  font-weight: 500;
 }
 
 .time:hover {

@@ -1,3 +1,10 @@
-<div>Title: {{title}}</div>
-<div>Up Votes: {{ups}}</div>
-<div>Posted by <strong>{{author}}</strong>, <span class="time" title="{{time}}">{{timeAgo}}</span></div>
+<a ng-show="thumbnail" href="{{url}}" target="_blank">
+  <img ng-src="{{thumbnail}}"/>
+</a>
+<div class="entry-content">
+  <div class="entry-title">{{title}}</div>
+  <div>
+    <div>Up Votes: {{ups}}</div>
+    <div>Posted by <span class="author">{{author}}</span>, <span class="time" title="{{time}}">{{timeAgo}}</span></div>
+  </div>
+</div>

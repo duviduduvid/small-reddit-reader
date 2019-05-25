@@ -17,7 +17,7 @@
         <input type="text" ng-model="subreddit" placeholder="Type a Subreddit name" on-enter="pullSubreddit()">
         <button ng-click="pullSubreddit()">Get It</button>
         <div class="reddit-entries-container" ng-show="redditEntries">
-          <div reddit-entry entry="entry" class="reddit-entry" ng-repeat="entry in redditEntries">
+          <div reddit-entry entry="entry" class="reddit-entry" ng-repeat="entry in redditEntries" ng-click="goToReddit(entry)">
           </div>
         </div>
       </div>
