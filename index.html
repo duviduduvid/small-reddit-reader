@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="small-reddit-reader">
+  <head>
+    <title>Small Reddit Reader</title>
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/app/app.js"></script>
+    <link rel="stylesheet" href="/app/app.css">
+    </head>
+    <body>
+      <header>
+        <h1>Small Reddit Reader</h1>
+        <h4>Enter subreddit name to see summary of it...</h4>
+      </header>
+      <div ng-controller="mainController">
+        <label>Subreddit Name:</label>
+        <input type="text" ng-model="subreddit" placeholder="Type a Subreddit name" on-enter="pullSubreddit()">
+        <button ng-click="pullSubreddit()">Get It</button>
+        <div class="reddit-entries-container" ng-show="redditEntries">
+          <div reddit-entry entry="entry" class="reddit-entry" ng-repeat="entry in redditEntries">
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
