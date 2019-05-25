@@ -32,19 +32,39 @@ app.controller('mainController', function($scope) {
     }
   };
 
-  const fetchSubredditData = async (url) => {
-    const response = await fetch(url);
-    const responseContent = await response.json();
-    return responseContent && responseContent.data;
-  };
-
+  
   const populateResults = redditEntries => {
+    if (!redditEntries) {
+      return handleError();
+    };
     $scope.$apply(() => {
       $scope.redditEntries = redditEntries.children.map(entry => entry.data);
       $scope.previous = $scope.redditEntries[0].name;
       $scope.next = redditEntries.after;
+      $scope.error = undefined;
     });    
   };
+
+  const fetchSubredditData = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        handleError();
+      }
+      const responseContent = await response.json();
+      return responseContent && responseContent.data;
+    }
+    catch (error) {
+      handleError();
+    }
+  };
+
+  const handleError = () => {
+    $scope.$apply(() => {
+      $scope.error = 'Failed retrieving information from reddit. Are you sure the subreddit name is correct?';
+    });
+  };
+
 });
 
 app.directive("redditEntry", function() {
