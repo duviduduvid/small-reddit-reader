@@ -18,3 +18,8 @@ header {
   margin: 5px 0;
   padding: 10px;
 }
+
+.time:hover {
+  text-decoration: underline;
+  cursor: pointer; 
+}
