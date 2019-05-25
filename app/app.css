@@ -41,3 +41,14 @@ header {
   text-decoration: underline;
   cursor: pointer; 
 }
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation-buttons button {
+  width: 180px;
+  padding: 5px;
+  font-size: 14px;
+}

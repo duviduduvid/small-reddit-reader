@@ -2,18 +2,34 @@ const app = angular.module('small-reddit-reader', []);
 
 app.controller('mainController', function($scope) {
 
+  const NEXT_PAGE = 'nextPage';
+  const PREVIOUS_PAGE = 'previousPage';
+
   $scope.pullSubreddit = function() {
     $scope.redditEntries = null;
+    $scope.currentPage = 1;
     fetchSubredditData(buildRedditUrl()).then(populateResults);
   };
 
+  $scope.loadPreviousPage = function() {
+    fetchSubredditData(buildRedditUrl(PREVIOUS_PAGE)).then(populateResults);
+    $scope.currentPage--;
+  }
+
   $scope.loadNextPage = function() {
-    fetchSubredditData(buildRedditUrl($scope.next)).then(populateResults);
+    fetchSubredditData(buildRedditUrl(NEXT_PAGE)).then(populateResults);
+    $scope.currentPage++;
   };
 
-  const buildRedditUrl = (next) => {
-    return next ? `http://www.reddit.com/r/${$scope.subreddit}.json?&after=${next}` :
-    `http://www.reddit.com/r/${$scope.subreddit}.json`;
+  const buildRedditUrl = (page) => {
+    switch(page) {
+      case NEXT_PAGE:
+        return `http://www.reddit.com/r/${$scope.subreddit}.json?after=${$scope.next}`;
+      case PREVIOUS_PAGE:
+        return `http://www.reddit.com/r/${$scope.subreddit}.json?before=${$scope.previous}`;
+      default:
+        return `http://www.reddit.com/r/${$scope.subreddit}.json?limit=20`;
+    }
   };
 
   const fetchSubredditData = async (url) => {
@@ -25,6 +41,7 @@ app.controller('mainController', function($scope) {
   const populateResults = redditEntries => {
     $scope.$apply(() => {
       $scope.redditEntries = redditEntries.children.map(entry => entry.data);
+      $scope.previous = $scope.redditEntries[0].name;
       $scope.next = redditEntries.after;
     });    
   };

@@ -19,7 +19,11 @@
         <div class="reddit-entries-container" ng-show="redditEntries">
           <div reddit-entry entry="entry" class="reddit-entry" ng-repeat="entry in redditEntries">
           </div>
-          <button ng-if="redditEntries" ng-click="loadNextPage()">Next Page</button>
+          <div class="navigation-buttons" ng-if="redditEntries">
+            <button ng-if="currentPage > 1" ng-click="loadPreviousPage()">Previous Page</button>
+            <flex></flex>
+            <button style="float: right;" ng-click="loadNextPage()">Next Page</button>
+          </div>
         </div>
       </div>
     </body>
