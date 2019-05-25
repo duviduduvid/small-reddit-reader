@@ -8,7 +8,6 @@ app.controller('mainController', function($scope) {
   };
 
   $scope.loadNextPage = function() {
-    $scope.currentPage++;
     fetchSubredditData(buildRedditUrl($scope.next)).then(populateResults);
   };
 
