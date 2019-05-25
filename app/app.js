@@ -7,10 +7,6 @@ app.controller('mainController', function($scope) {
     fetchSubredditData($scope.subreddit).then(populateResults);
   };
 
-  $scope.goToReddit = function(redditEntry) {
-    window.open(redditEntry.url, '_blank');
-  };
-
   const fetchSubredditData = async subreddit => {
     const response = await fetch(`http://www.reddit.com/r/${subreddit}.json`);
     const responseContent = await response.json();
@@ -39,7 +35,7 @@ app.directive("redditEntry", function() {
 	return {
 		templateUrl:'./app/reddit-entry.html',
 		scope: {
-			entry: '='
+      entry: '='
 		},
 		link: function(scope, element, attributes) {
       const {title, author, permalink, ups, created_utc, thumbnail} = scope.entry;
