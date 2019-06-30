@@ -1,12 +1,12 @@
-<a ng-if="thumbnail" href="{{url}}" target="_blank">
-  <img ng-src="{{thumbnail}}"/>
+<a ng-if="thumbnail" href="{{::url}}" target="_blank">
+  <img ng-src="{{::thumbnail}}"/>
 </a>
 <div class="entry-content">
-  <div class="entry-title">{{title}}</div>
+  <div class="entry-title">{{::title}}</div>
   <div>
-    <p>{{selfText}}</p>
-    <a href="{{url}}" target="_blank">Read more...</a>
+    <p>{{::selfText}}</p>
+    <a href="{{::url}}" target="_blank">Read more...</a>
     <div>Up Votes: {{ups}}</div>
-    <div>Posted by <span class="author">{{author}}</span>, <span class="time" title="{{time}}">{{timeAgo}}</span></div>
+    <div>Posted by <span class="author">{{::author}}</span>, <span class="time" title="{{::time}}">{{::timeAgo}}</span></div>
   </div>
 </div>
