@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/duviduduvid/small-reddit-reader#readme",
   "dependencies": {
-    "angular": "^1.7.9",
+    "angular": "^1.8.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "moment": "^2.24.0"
